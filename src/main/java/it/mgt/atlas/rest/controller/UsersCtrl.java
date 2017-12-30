@@ -14,7 +14,7 @@ import it.mgt.atlas.view.DefaultView;
 
 import it.mgt.util.spring.web.auth.AuthUserInj;
 
-@RequestMapping("/user")
+@RequestMapping("/users")
 @Controller
 public class UsersCtrl {
 
