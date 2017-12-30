@@ -36,6 +36,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
+import org.springframework.http.converter.json.SpringHandlerInstantiator;
 
 @Configuration
 @ComponentScan(basePackages = {"it.mgt.atlas.repository.impl", "it.mgt.atlas.service.impl", "it.mgt.atlas.task"})
@@ -48,9 +49,12 @@ import javax.sql.DataSource;
     @PropertySource("classpath:atlas.properties")})
 @EntityPackage("it.mgt.atlas.entity")
 public class BaseContext extends EntityPackageAwareConfiguration {
+    
+    @Autowired
+    private DataSource dataSource;
 
     @Autowired
-    Environment env;
+    private Environment env;
 
     @Bean
     public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
@@ -76,12 +80,6 @@ public class BaseContext extends EntityPackageAwareConfiguration {
         return taskExecutor;
     }
 
-    @Autowired
-    DataSource dataSource;
-
-    @Autowired
-    JpaVendorAdapter jpaVendorAdapter;
-
     @Bean
     public JpaVendorAdapter jpaVendorAdapter() {
         return new HibernateJpaVendorAdapter();
@@ -92,7 +90,7 @@ public class BaseContext extends EntityPackageAwareConfiguration {
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
         em.setDataSource(dataSource);
         em.setPackagesToScan(getEntityPackages());
-        em.setJpaVendorAdapter(jpaVendorAdapter);
+        em.setJpaVendorAdapter(jpaVendorAdapter());
         em.getJpaPropertyMap().put("hibernate.hbm2ddl.auto", env.getProperty("it.mgt.atlas.hibernate.hbm2ddl.auto"));
         em.getJpaPropertyMap().put("hibernate.physical_naming_strategy", env.getProperty("it.mgt.atlas.hibernate.physical_naming_strategy"));
         em.getJpaPropertyMap().put("hibernate.id.new_generator_mappings", env.getProperty("it.mgt.atlas.hibernate.id.new_generator_mappings"));
@@ -132,6 +130,7 @@ public class BaseContext extends EntityPackageAwareConfiguration {
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
         mapper.setAnnotationIntrospector(pair);
+        mapper.setHandlerInstantiator(new SpringHandlerInstantiator(applicationContext.getAutowireCapableBeanFactory()));
 
         return mapper;
     }

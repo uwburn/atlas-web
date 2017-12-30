@@ -1,6 +1,7 @@
 package it.mgt.atlas.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import it.mgt.util.spring.web.auth.AuthUserResolver;
 import it.mgt.util.spring.web.auth.AuthorizationInterceptor;
 import it.mgt.util.spring.web.auth.BasicAuthInterceptor;
 import it.mgt.util.spring.web.auth.RequiredOperationInterceptor;
@@ -40,6 +41,7 @@ public class WebContext extends EnhancedWebMvcConfigurerAdapter {
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
         super.addArgumentResolvers(argumentResolvers);
         
+        argumentResolvers.add(authUserResolver());
         argumentResolvers.add(jpaResolver());
     }
     
@@ -118,6 +120,11 @@ public class WebContext extends EnhancedWebMvcConfigurerAdapter {
     @Bean
     RequiredOperationInterceptor requiredOperationInterceptor() {
         return new RequiredOperationInterceptor();
+    }
+    
+    @Bean
+    AuthUserResolver authUserResolver() {
+        return new AuthUserResolver();
     }
     
     @Bean
