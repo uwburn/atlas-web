@@ -21,11 +21,11 @@ import javax.persistence.Table;
 
 @Entity
 @Table(indexes = {
-        @Index(columnList = "name", unique = true)
+    @Index(columnList = "name", unique = true)
 })
 @NamedQueries({
-    @NamedQuery(name = "Role.findAll", query = "SELECT r FROM Role"),
-    @NamedQuery(name = "Role.findByName", query = "SELECT r FROM Role WHERE r.name = :name")
+    @NamedQuery(name = "Role.findAll", query = "SELECT r FROM Role r"),
+    @NamedQuery(name = "Role.findByName", query = "SELECT r FROM Role r WHERE r.name = :name")
 })
 public class Role implements AuthRole, Serializable {
 

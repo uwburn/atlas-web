@@ -1,7 +1,9 @@
 package it.mgt.atlas.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 import it.mgt.atlas.view.PasswordView;
+import it.mgt.atlas.view.RoleView;
 import it.mgt.util.spring.auth.AuthRole;
 import it.mgt.util.spring.auth.AuthUser;
 import java.io.Serializable;
@@ -11,13 +13,12 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @Entity
-@Table(name = "\"user\"",
-        uniqueConstraints = {
-                @UniqueConstraint(columnNames = "username"),
-                @UniqueConstraint(columnNames = "email")
-        })
+@Table(uniqueConstraints = {
+    @UniqueConstraint(columnNames = "username"),
+    @UniqueConstraint(columnNames = "email")
+})
 @NamedQueries({
-    @NamedQuery(name = "User.findAll", query = "SELECT u FROM User"),
+    @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u"),
     @NamedQuery(name = "User.findByUsername", query = "SELECT u FROM User u WHERE u.username = :username"),
     @NamedQuery(name = "User.findByUsernameAndPassword", query = "SELECT u FROM User u WHERE u.username = :username AND u.password = :password"),
     @NamedQuery(name = "User.findByEmail", query = "SELECT u FROM User u WHERE u.email = :email"),
@@ -140,6 +141,7 @@ public class User implements AuthUser, Serializable {
         this.registrationDate = registrationDate;
     }
 
+    @JsonView(RoleView.class)
     public Set<Role> getRoles() {
         return roles;
     }
@@ -148,6 +150,7 @@ public class User implements AuthUser, Serializable {
         this.roles = roles;
     }
 
+    @JsonIgnore
     public Set<Session> getSessions() {
         return sessions;
     }

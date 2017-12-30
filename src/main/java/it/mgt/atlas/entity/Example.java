@@ -1,22 +1,20 @@
 package it.mgt.atlas.entity;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 
 import javax.persistence.*;
 import java.util.Date;
-import it.mgt.atlas.repository.ExampleRepo;
 import java.io.Serializable;
 
 @Entity
 @Table(indexes = {
-        @Index(columnList = "code", unique = true)
+    @Index(columnList = "code", unique = true)
 })
 @Configurable
 @NamedQueries({
-    @NamedQuery(name = "Example.findAll", query = "SELECT e FROM Example"),
-    @NamedQuery(name = "Example.findByCode", query = "SELECT e FROM Example WHERE e.code = :code"),
-    @NamedQuery(name = "Example.countAll", query = "SELECT COUNT(e) FROM Example"),
+    @NamedQuery(name = "Example.findAll", query = "SELECT e FROM Example e"),
+    @NamedQuery(name = "Example.findByCode", query = "SELECT e FROM Example e WHERE e.code = :code"),
+    @NamedQuery(name = "Example.countAll", query = "SELECT COUNT(e) FROM Example e"),
 })
 public class Example implements Serializable {
 

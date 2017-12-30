@@ -12,10 +12,9 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "\"session\"",
-        uniqueConstraints = {
-                @UniqueConstraint(columnNames = "token")
-        })
+@Table(uniqueConstraints = {
+    @UniqueConstraint(columnNames = "token")
+})
 @NamedQueries({
     @NamedQuery(name = "Session.findActiveByToken", query = "SELECT s FROM Session s WHERE s.endDate >= :now and s.token = :token"),
     @NamedQuery(name = "Session.countActiveByUser", query = "SELECT COUNT(s) FROM Session s WHERE s.endDate >= :now AND s.user = :user")
