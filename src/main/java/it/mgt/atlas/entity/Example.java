@@ -4,31 +4,28 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 
 import javax.persistence.*;
-import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Date;
 import it.mgt.atlas.repository.ExampleRepo;
 import java.io.Serializable;
 
 @Entity
 @Table(indexes = {
-        @Index(columnList = "code")
+        @Index(columnList = "code", unique = true)
 })
-@XmlRootElement
 @Configurable
+@NamedQueries({
+    @NamedQuery(name = "Example.findAll", query = "SELECT e FROM Example"),
+    @NamedQuery(name = "Example.findByCode", query = "SELECT e FROM Example WHERE e.code = :code"),
+    @NamedQuery(name = "Example.countAll", query = "SELECT COUNT(e) FROM Example"),
+})
 public class Example implements Serializable {
-
-    // Dependencies
-
-    @Autowired
-    @Transient
-    protected ExampleRepo exampleRepository;
 
     // Fields
 
     @Id
     @GeneratedValue
     private Long id;
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String code;
     @Column(nullable = false)
     @Temporal(TemporalType.TIMESTAMP)

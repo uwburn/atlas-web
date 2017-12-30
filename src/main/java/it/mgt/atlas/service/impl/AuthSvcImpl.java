@@ -48,7 +48,7 @@ public class AuthSvcImpl implements AuthSvc {
     @Override
     @Transactional
     public AuthUser getAuthUser(String name) {
-        return userRepository.findByName(name);
+        return userRepository.findByUsername(name);
     }
 
     @Override

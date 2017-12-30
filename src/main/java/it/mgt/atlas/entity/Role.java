@@ -13,8 +13,20 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import it.mgt.util.spring.auth.AuthRole;
 import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.Index;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
 @Entity
+@Table(indexes = {
+        @Index(columnList = "name", unique = true)
+})
+@NamedQueries({
+    @NamedQuery(name = "Role.findAll", query = "SELECT r FROM Role"),
+    @NamedQuery(name = "Role.findByName", query = "SELECT r FROM Role WHERE r.name = :name")
+})
 public class Role implements AuthRole, Serializable {
 
     public static final String ROOT_ROLE_NAME = "ROOT";
@@ -24,6 +36,7 @@ public class Role implements AuthRole, Serializable {
     @Id
     @GeneratedValue
     private Long id;
+    @Column(nullable = false, unique = true)
     private String name;
     private int level = 0;
     @ElementCollection

@@ -1,5 +1,7 @@
 package it.mgt.atlas.entity;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import it.mgt.atlas.view.PasswordView;
 import it.mgt.util.spring.auth.AuthRole;
 import it.mgt.util.spring.auth.AuthUser;
 import java.io.Serializable;
@@ -9,11 +11,19 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @Entity
-@Table(name = "\"User\"",
+@Table(name = "\"user\"",
         uniqueConstraints = {
                 @UniqueConstraint(columnNames = "username"),
                 @UniqueConstraint(columnNames = "email")
         })
+@NamedQueries({
+    @NamedQuery(name = "User.findAll", query = "SELECT u FROM User"),
+    @NamedQuery(name = "User.findByUsername", query = "SELECT u FROM User u WHERE u.username = :username"),
+    @NamedQuery(name = "User.findByUsernameAndPassword", query = "SELECT u FROM User u WHERE u.username = :username AND u.password = :password"),
+    @NamedQuery(name = "User.findByEmail", query = "SELECT u FROM User u WHERE u.email = :email"),
+    @NamedQuery(name = "User.countByUsername", query = "SELECT COUNT(u) FROM User u WHERE u.username = :username"),
+    @NamedQuery(name = "User.countByEmail", query = "SELECT COUNT(u) FROM User u WHERE u.email = :email")
+})
 public class User implements AuthUser, Serializable {
 
     // Fields
@@ -89,6 +99,7 @@ public class User implements AuthUser, Serializable {
     }
 
     @Override
+    @JsonView(PasswordView.class)
     public String getPassword() {
         return password;
     }
@@ -144,7 +155,5 @@ public class User implements AuthUser, Serializable {
     public void setSessions(Set<Session> sessions) {
         this.sessions = sessions;
     }
-
-    // Repo methods
 
 }

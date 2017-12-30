@@ -1,21 +1,28 @@
 package it.mgt.atlas.entity;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import it.mgt.atlas.view.UserView;
 import it.mgt.util.spring.auth.AuthSession;
 import it.mgt.util.spring.auth.AuthUser;
+import it.mgt.util.spring.web.jpa.ParamHint;
+import it.mgt.util.spring.web.jpa.ParamHints;
 import java.io.Serializable;
-import org.springframework.beans.factory.annotation.Configurable;
 
 import javax.persistence.*;
-import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Date;
 
 @Entity
-@Table(name = "\"Session\"",
+@Table(name = "\"session\"",
         uniqueConstraints = {
                 @UniqueConstraint(columnNames = "token")
         })
-@XmlRootElement
-@Configurable
+@NamedQueries({
+    @NamedQuery(name = "Session.findActiveByToken", query = "SELECT s FROM Session s WHERE s.endDate >= :now and s.token = :token"),
+    @NamedQuery(name = "Session.countActiveByUser", query = "SELECT COUNT(s) FROM Session s WHERE s.endDate >= :now AND s.user = :user")
+})
+@ParamHints({
+    @ParamHint(value = "now", type = Date.class)
+})
 public class Session implements AuthSession, Serializable {
 
     // Fields
@@ -78,6 +85,7 @@ public class Session implements AuthSession, Serializable {
         this.id = id;
     }
 
+    @JsonView(UserView.class)
     public User getUser() {
         return user;
     }

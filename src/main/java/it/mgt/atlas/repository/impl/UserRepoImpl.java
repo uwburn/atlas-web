@@ -26,53 +26,48 @@ public class UserRepoImpl extends BaseRepositoryImpl<User, Long> implements User
     }
 
     @Override
-    public User findByName(String username) {
-        Query query = em.createQuery("SELECT u FROM User u WHERE u.username = :username");
-        query.setParameter("username", username);
-        List<User> list = query.getResultList();
-        if (list.isEmpty())
-            return null;
-
-        return list.get(0);
+    public User findByUsername(String username) {
+        return em.createNamedQuery("User.findByUsername", User.class)
+                .setParameter("username", username)
+                .getResultList()
+                .stream()
+                .findFirst()
+                .orElse(null);
     }
 
     @Override
     public User findByNameAndPassword(String username, String password) {
-        Query query = em.createQuery("SELECT u FROM User u WHERE u.username = :username AND u.password = :password");
-        query.setParameter("username", username);
-        query.setParameter("password", password);
-        List<User> list = query.getResultList();
-        if (list.isEmpty())
-            return null;
-
-        return list.get(0);
+        return em.createNamedQuery("User.findByUsernameAndPassword", User.class)
+                .setParameter("username", username)
+                .setParameter("password", password)
+                .getResultList()
+                .stream()
+                .findFirst()
+                .orElse(null);
     }
 
     @Override
     public Number countByEmail(String email) {
-        Query query = em.createQuery("SELECT COUNT(u) FROM User u WHERE u.email = :email");
-        query.setParameter("email", email);
-
-        return (Number) query.getSingleResult();
+        return em.createNamedQuery("User.countByEmail", Number.class)
+                .setParameter("email", email)
+                .getSingleResult();
     }
 
     @Override
-    public Number countByName(String username) {
-        Query query = em.createQuery("SELECT COUNT(u) FROM User u WHERE u.username = :username");
-        query.setParameter("username", username);
-
-        return (Number) query.getSingleResult();
+    public Number countByUsername(String username) {
+        return em.createNamedQuery("User.countByUsername", Number.class)
+                .setParameter("username", username)
+                .getSingleResult();
     }
 
     @Override
     public User findByEmail(String email) {
-        Query query = em.createQuery("SELECT u FROM User u WHERE u.email = :email");
-        query.setParameter("email", email);
-        List<User> list = query.getResultList();
-        if (list.isEmpty())
-            return null;
-
-        return list.get(0);
+        return em.createNamedQuery("User.findByEmail", User.class)
+                .setParameter("email", email)
+                .getResultList()
+                .stream()
+                .findFirst()
+                .orElse(null);
     }
 
 }

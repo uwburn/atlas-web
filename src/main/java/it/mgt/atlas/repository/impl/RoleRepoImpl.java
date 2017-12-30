@@ -26,7 +26,7 @@ public class RoleRepoImpl extends BaseRepositoryImpl<Role, Long> implements Role
 
     @Override
     public Role findByName(String name) {
-        TypedQuery<Role> query = em.createQuery("SELECT r FROM Role r WHERE r.name = :name", Role.class);
+        TypedQuery<Role> query = em.createNamedQuery("Role.findByName", Role.class);
         query.setParameter("name", name);
         return query.getResultList()
                 .stream()

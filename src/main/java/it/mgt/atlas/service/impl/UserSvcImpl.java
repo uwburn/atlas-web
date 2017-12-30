@@ -74,7 +74,7 @@ public class UserSvcImpl implements UserSvc {
 
         Date now = new Date();
 
-        if (userRepository.countByName(user.getUsername()).longValue() > 0)
+        if (userRepository.countByUsername(user.getUsername()).longValue() > 0)
             throw new UserCreationException("U1", "Username already exists");
 
         if (!usernameValidator.validate(user.getUsername()))
@@ -103,7 +103,7 @@ public class UserSvcImpl implements UserSvc {
         if (!usernameValidator.validate(user.getUsername()))
             throw new UserCreationException("U2", "Invalid username");
 
-        User existingUser = userRepository.findByName(user.getUsername());
+        User existingUser = userRepository.findByUsername(user.getUsername());
         if (!existingUser.getId().equals(user.getId()))
             throw new UserCreationException("U1", "Username already exists");
 
