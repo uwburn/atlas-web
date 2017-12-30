@@ -1,6 +1,7 @@
 package it.mgt.atlas.rest.controller;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import it.mgt.atlas.annotation.CustomExampleInj;
 import it.mgt.atlas.entity.Example;
 import it.mgt.atlas.entity.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,6 +66,13 @@ public class ExamplesCtrl {
     ) Long count) {
         return count;
     }
+    
+    @RequestMapping(method = RequestMethod.GET, value = "/customResolver")
+    @ResponseBody
+    @RequiredOperation(Operation.READ_EXAMPLE)
+    public Example getCustomResolver(@CustomExampleInj Example example) {
+        return example;
+    }
 
     @RequestMapping(method = RequestMethod.POST)
     @ResponseBody
@@ -96,7 +104,7 @@ public class ExamplesCtrl {
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @Transactional
-    @RequiredOperation(Operation.READ_EXAMPLE)
+    @RequiredOperation(Operation.REMOVE_EXAMPLE)
     public void delete(@JpaInj(
             primaryKey = "id",
             pathParams = {

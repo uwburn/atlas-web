@@ -10,9 +10,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import it.mgt.atlas.entity.Example;
+import it.mgt.atlas.entity.Operation;
 import it.mgt.jpa.json2jpa.JpaDeserializer;
 import it.mgt.jpa.json2jpa.JpaDeserializerQuery;
 import it.mgt.jpa.json2jpa.JpaDeserializerQueryParam;
+import it.mgt.util.spring.web.auth.RequiredOperation;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -63,6 +65,7 @@ public class ExampleCtrl {
 
     @RequestMapping(method = RequestMethod.POST)
     @ResponseBody
+    @RequiredOperation(Operation.READ_EXAMPLE)
     @Transactional
     public Msg rpc(@RequestBody Msg msg) {
         return msg;
