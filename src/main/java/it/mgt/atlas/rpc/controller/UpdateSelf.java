@@ -1,5 +1,6 @@
 package it.mgt.atlas.rpc.controller;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import it.mgt.atlas.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import it.mgt.atlas.service.UserSvc;
+import it.mgt.atlas.view.DefaultView;
 import it.mgt.util.spring.auth.AuthSvc;
 import it.mgt.util.spring.web.auth.AuthUserInj;
 import it.mgt.util.spring.web.exception.ForbiddenException;
@@ -95,8 +97,8 @@ public class UpdateSelf {
     @RequestMapping(method = RequestMethod.POST)
     @ResponseBody
     @Transactional
-    public Output post(@AuthUserInj User user,
-            @RequestBody Input input) {
+    @JsonView(DefaultView.class)
+    public Output post(@AuthUserInj User user, @RequestBody Input input) {
         String hashedPassword = authSvc.hashPassword(input.getCurrentPassword());
         
         if (!user.getPassword().equals(hashedPassword))

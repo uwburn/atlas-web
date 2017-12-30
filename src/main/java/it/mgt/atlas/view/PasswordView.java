@@ -2,6 +2,7 @@ package it.mgt.atlas.view;
 
 import it.mgt.util.spring.web.config.NamedView;
 
-@NamedView("default")
-public interface DefaultView {
+@NamedView("noPassword")
+public interface PasswordView {
+    
 }

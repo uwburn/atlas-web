@@ -1,4 +1,4 @@
-package it.mgt.atlas.controller;
+package it.mgt.atlas.rest.controller;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import it.mgt.atlas.entity.Example;
@@ -49,12 +49,19 @@ public class ExamplesCtrl {
     ) Example example) {
         return example;
     }
+    
+    @RequestMapping(method = RequestMethod.GET, value = "/first")
+    @ResponseBody
+    @RequiredOperation(Operation.READ_EXAMPLE)
+    public Example getFirst(@JpaInj Example example) {
+        return example;
+    }
 
     @RequestMapping(method = RequestMethod.GET, value = "/count")
     @ResponseBody
     @RequiredOperation(Operation.READ_EXAMPLE)
     public Long count(@JpaInj(
-            query = "Example.countAll"
+            defaultQuery = "Example.countAll"
     ) Long count) {
         return count;
     }
