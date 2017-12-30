@@ -21,4 +21,16 @@ public class ExampleRepoImpl extends BaseRepositoryImpl<Example, Long> implement
     public void setKey(Example example, Long key) {
         example.setId(key);
     }
+
+    @Override
+    public Example findByCode(String code) {
+        return em.createNamedQuery("Example.findByCode", Example.class)
+                .setParameter("code", code)
+                .getResultList()
+                .stream()
+                .findFirst()
+                .orElse(null);
+    }
+    
+    
 }
