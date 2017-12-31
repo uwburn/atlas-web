@@ -11,8 +11,7 @@ import it.mgt.jpa.json2jpa.Json2JpaFactory;
 import it.mgt.util.spring.config.EntityPackage;
 import it.mgt.util.spring.config.EntityPackageAwareConfiguration;
 import it.mgt.util.spring.log4j.Log4JRefresh;
-import it.mgt.util.spring.version.VersionService;
-import it.mgt.util.spring.version.VersionServiceImpl;
+import it.mgt.util.spring.version.ProjectMetaSvcImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.*;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
@@ -37,6 +36,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import org.springframework.http.converter.json.SpringHandlerInstantiator;
+import it.mgt.util.spring.version.ProjectMetaSvc;
 
 @Configuration
 @ComponentScan(basePackages = {"it.mgt.atlas.repository.impl", "it.mgt.atlas.service.impl", "it.mgt.atlas.task"})
@@ -154,8 +154,8 @@ public class BaseContext extends EntityPackageAwareConfiguration {
     }
 
     @Bean
-    public VersionService versionService() {
-        return new VersionServiceImpl("version.properties");
+    public ProjectMetaSvc versionService() {
+        return new ProjectMetaSvcImpl("version.properties");
     }
 
     @Bean
