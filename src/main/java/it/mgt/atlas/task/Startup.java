@@ -58,7 +58,7 @@ public class Startup implements ApplicationListener<ContextRefreshedEvent> {
             roleRepo.persist(admin);
         }
         
-        User atlas = userRepo.findByUsername("Atlas");
+        User atlas = userRepo.findByUsername("atlas");
         if (atlas == null) {
             LOGGER.debug("Creating atlas user");
             
