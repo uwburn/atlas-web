@@ -3,7 +3,7 @@ Spring MVC + Hibernate JPA web project: use this project as a template, then
 create and share Maven archetype from it.
 
 ### Archetype generation
-`mvn archetype:create-from-project`
+`mvn archetype:create-from-project -Darchetype.properties=archetype.properties`
 
 Check version number, 1.2.0 is there as an example.
 
