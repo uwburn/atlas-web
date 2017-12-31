@@ -16,6 +16,7 @@ Check version number, 1.2.0 is there as an example.
 ### Use generated project
 Remember to add to the context of your container datasource and Hibernate 
 relevant properties definition:
+
 `<Resource name="jdbc/atlas" auth="Container" type="javax.sql.DataSource"
     maxTotal="2" maxIdle="2" maxWaitMillis="10000"
     username="yourUsr" password="yourPwd" driverClassName="com.mysql.jdbc.Driver"
