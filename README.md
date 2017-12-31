@@ -20,7 +20,9 @@ relevant properties definition:
     maxTotal="2" maxIdle="2" maxWaitMillis="10000"
     username="yourUsr" password="yourPwd" driverClassName="com.mysql.jdbc.Driver"
     url="jdbc:mysql://localhost:3306/atlas"/>`
+
 `<Environment name="it.mgt.atlas.hibernate.dialect" value="org.hibernate.dialect.MySQL57Dialect" type="java.lang.String" />`
+
 `<Environment name="it.mgt.atlas.hibernate.dialect.storage_engine" value="org.hibernate.dialect.InnoDBStorageEngine" type="java.lang.String" />`
 
 Check the properties names, you will need to change them according to your
