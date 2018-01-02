@@ -7,7 +7,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.introspect.AnnotationIntrospectorPair;
 import com.fasterxml.jackson.databind.introspect.JacksonAnnotationIntrospector;
 import com.fasterxml.jackson.module.jaxb.JaxbAnnotationIntrospector;
-import it.mgt.jpa.json2jpa.Json2JpaFactory;
+import it.mgt.util.json2jpa.Json2JpaFactory;
 import it.mgt.util.spring.config.EntityPackage;
 import it.mgt.util.spring.config.EntityPackageAwareConfiguration;
 import it.mgt.util.spring.log4j.Log4JRefresh;
@@ -58,8 +58,7 @@ public class BaseContext extends EntityPackageAwareConfiguration {
 
     @Bean
     public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
-        PropertySourcesPlaceholderConfigurer pspc = new PropertySourcesPlaceholderConfigurer();
-        return pspc;
+        return new PropertySourcesPlaceholderConfigurer();
     }
 
     @Bean

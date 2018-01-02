@@ -4,11 +4,13 @@ import com.fasterxml.jackson.databind.JsonNode;
 import it.mgt.atlas.annotation.CustomExampleInj;
 import it.mgt.atlas.entity.Example;
 import it.mgt.atlas.entity.Operation;
+import it.mgt.atlas.view.DefaultView;
+import it.mgt.util.spring.web.jsonview.DynamicJsonView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import it.mgt.atlas.repository.ExampleRepo;
-import it.mgt.jpa.json2jpa.Json2JpaFactory;
+import it.mgt.util.json2jpa.Json2JpaFactory;
 import it.mgt.util.spring.web.auth.RequiredOperation;
 import it.mgt.util.spring.web.jpa.JpaInj;
 import it.mgt.util.spring.web.jpa.PathParam;
@@ -33,6 +35,7 @@ public class ExamplesCtrl {
     @RequestMapping(method = RequestMethod.GET)
     @ResponseBody
     @RequiredOperation(Operation.READ_EXAMPLE)
+    @DynamicJsonView(defaultView = DefaultView.class)
     public List<Example> get(@JpaInj(
             defaultQuery = "Example.findAll"
     ) List<Example> examples) {
@@ -42,6 +45,7 @@ public class ExamplesCtrl {
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     @ResponseBody
     @RequiredOperation(Operation.READ_EXAMPLE)
+    @DynamicJsonView(defaultView = DefaultView.class)
     public Example getById(@JpaInj(
             primaryKey = "id",
             pathParams = {
@@ -54,6 +58,7 @@ public class ExamplesCtrl {
     @RequestMapping(method = RequestMethod.GET, value = "/first")
     @ResponseBody
     @RequiredOperation(Operation.READ_EXAMPLE)
+    @DynamicJsonView(defaultView = DefaultView.class)
     public Example getFirst(@JpaInj Example example) {
         return example;
     }
@@ -62,7 +67,7 @@ public class ExamplesCtrl {
     @ResponseBody
     @RequiredOperation(Operation.READ_EXAMPLE)
     public Long count(@JpaInj(
-            defaultQuery = "Example.countAll"
+            query = "Example.countAll"
     ) Long count) {
         return count;
     }
@@ -70,6 +75,7 @@ public class ExamplesCtrl {
     @RequestMapping(method = RequestMethod.GET, value = "/customResolver")
     @ResponseBody
     @RequiredOperation(Operation.READ_EXAMPLE)
+    @DynamicJsonView(defaultView = DefaultView.class)
     public Example getCustomResolver(@CustomExampleInj Example example) {
         return example;
     }
@@ -78,6 +84,7 @@ public class ExamplesCtrl {
     @ResponseBody
     @Transactional
     @RequiredOperation(Operation.ADD_EXAMPLE)
+    @DynamicJsonView(defaultView = DefaultView.class)
     public Example post(@RequestBody JsonNode json) {
         Example example = json2JpaFactory.build()
                 .setMaxDepth(1)
@@ -90,6 +97,7 @@ public class ExamplesCtrl {
     @ResponseBody
     @Transactional
     @RequiredOperation(Operation.EDIT_EXAMPLE)
+    @DynamicJsonView(defaultView = DefaultView.class)
     public Example patch(@JpaInj(
             primaryKey = "id",
             pathParams = {

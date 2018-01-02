@@ -3,6 +3,7 @@ package it.mgt.atlas.rpc.controller;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import javax.transaction.Transactional;
 
+import it.mgt.util.json2jpa.JpaDeserializerQuery;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,9 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import it.mgt.atlas.entity.Example;
 import it.mgt.atlas.entity.Operation;
-import it.mgt.jpa.json2jpa.JpaDeserializer;
-import it.mgt.jpa.json2jpa.JpaDeserializerQuery;
-import it.mgt.jpa.json2jpa.JpaDeserializerQueryParam;
+import it.mgt.util.json2jpa.JpaDeserializer;
 import it.mgt.util.spring.web.auth.RequiredOperation;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,9 +37,7 @@ public class ExampleCtrl {
         }
 
         @JsonDeserialize(using = JpaDeserializer.class)
-        @JpaDeserializerQuery(query = "Example.findByCode", params = {
-            @JpaDeserializerQueryParam(name = "code", type = String.class)
-        })
+        @JpaDeserializerQuery("Example.findByCode")
         public Example getExampleByCode() {
             return exampleByCode;
         }
@@ -50,9 +47,7 @@ public class ExampleCtrl {
         }
 
         @JsonDeserialize(using = JpaDeserializer.class)
-        @JpaDeserializerQuery(query = "Example.findByCode", params = {
-            @JpaDeserializerQueryParam(name = "code", type = String.class)
-        })
+        @JpaDeserializerQuery("Example.findByCode")
         public List<Example> getExamplesByQuery() {
             return examplesByQuery;
         }

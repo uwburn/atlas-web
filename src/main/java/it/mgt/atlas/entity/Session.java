@@ -4,8 +4,8 @@ import com.fasterxml.jackson.annotation.JsonView;
 import it.mgt.atlas.view.UserView;
 import it.mgt.util.spring.auth.AuthSession;
 import it.mgt.util.spring.auth.AuthUser;
-import it.mgt.util.spring.web.jpa.ParamHint;
-import it.mgt.util.spring.web.jpa.ParamHints;
+import it.mgt.util.jpa.ParamHint;
+import it.mgt.util.jpa.ParamHints;
 import java.io.Serializable;
 
 import javax.persistence.*;
