@@ -1,7 +1,7 @@
 package it.mgt.atlas.rest.controller;
 
-import it.mgt.util.spring.version.ProjectMeta;
-import it.mgt.util.spring.version.ProjectMetaSvc;
+import it.mgt.util.spring.meta.ProjectMeta;
+import it.mgt.util.spring.meta.ProjectMetaSvc;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

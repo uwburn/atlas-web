@@ -6,6 +6,7 @@ import it.mgt.util.spring.web.auth.AuthorizationInterceptor;
 import it.mgt.util.spring.web.auth.BasicAuthInterceptor;
 import it.mgt.util.spring.web.auth.RequiredOperationInterceptor;
 import it.mgt.util.spring.web.auth.SessionTokenInterceptor;
+import it.mgt.util.spring.web.bean.BeanMethodResolver;
 import it.mgt.util.spring.web.config.EnhancedWebMvcConfigurerAdapter;
 import it.mgt.util.spring.web.config.JsonViewConfiguration;
 import it.mgt.util.spring.web.jpa.JpaResolver;
@@ -43,6 +44,7 @@ public class WebContext extends EnhancedWebMvcConfigurerAdapter {
         
         argumentResolvers.add(authUserResolver());
         argumentResolvers.add(jpaResolver());
+        argumentResolvers.add(beanMethodResolver());
     }
     
     @Override
@@ -130,6 +132,11 @@ public class WebContext extends EnhancedWebMvcConfigurerAdapter {
     @Bean
     JpaResolver jpaResolver() {
         return new JpaResolver();
+    }
+
+    @Bean
+    BeanMethodResolver beanMethodResolver() {
+        return new BeanMethodResolver();
     }
 
 }
