@@ -16,7 +16,7 @@ import java.util.Date;
     @UniqueConstraint(columnNames = "token")
 })
 @NamedQueries({
-    @NamedQuery(name = "Session.findActiveByToken", query = "SELECT s FROM Session s WHERE s.endDate >= :now and s.token = :token"),
+    @NamedQuery(name = "Session.findActiveByToken", query = "SELECT s FROM Session s JOIN FETCH s.user WHERE s.endDate >= :now and s.token = :token"),
     @NamedQuery(name = "Session.countActiveByUser", query = "SELECT COUNT(s) FROM Session s WHERE s.endDate >= :now AND s.user = :user")
 })
 @ParamHints({

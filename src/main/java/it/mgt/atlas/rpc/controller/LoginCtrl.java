@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.transaction.Transactional;
 
+import it.mgt.util.spring.web.exception.UnauthorizedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -76,6 +77,10 @@ public class LoginCtrl {
     @JsonView(UserView.class)
     public Output postLogin(@RequestBody Input input, HttpServletRequest request, HttpServletResponse response) {
         User user = authSvc.getUser(input.getUsername(), input.getPassword());
+
+        if (user == null)
+            throw new UnauthorizedException();
+
         return new Output(post(user, request, response));
     }
 

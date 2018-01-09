@@ -6,15 +6,13 @@ import it.mgt.util.spring.web.auth.SessionTokenInterceptor;
 import it.mgt.util.spring.web.exception.NotFoundException;
 import it.mgt.util.spring.web.exception.UnauthorizedException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 @RequestMapping("/logout")
 @Controller
@@ -25,17 +23,11 @@ public class LogoutCtrl {
 
     @Autowired
     private SessionTokenInterceptor sessionTokenInterceptor;
-    
-    public static class Input {
-    }
-    
-    public static class Output {
-    }
 
     @RequestMapping(method = RequestMethod.POST)
-    @ResponseBody
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @Transactional
-    public Output procedure(HttpServletRequest request, @RequestBody Input input) {
+    public void procedure(HttpServletRequest request) {
         String token = null;
         Cookie[] cookies = request.getCookies();
         for (Cookie cookie : cookies) {
@@ -54,8 +46,6 @@ public class LogoutCtrl {
             throw new NotFoundException();
 
         authSvc.invalidateSession(session);
-        
-        return new Output();
     }
 
 }
