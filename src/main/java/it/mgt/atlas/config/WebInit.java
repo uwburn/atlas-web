@@ -26,7 +26,6 @@ public class WebInit implements WebApplicationInitializer {
 
     private final static Logger LOGGER = LoggerFactory.getLogger(WebInit.class);
 
-    private static final String DISPATCHER_SERVLET_NAME = "dispatcher";
     private static final String CORS_FILTER_NAME = "cors";
     private static final String AUTH_REQUEST_WRAPPER_FILTER_NAME = "authRequestWrapper";
 
@@ -62,9 +61,7 @@ public class WebInit implements WebApplicationInitializer {
         dispatcher.setLoadOnStartup(1);
         dispatcher.addMapping(mapping);
         
-        filters.forEach((f) -> {
-            f.addMappingForServletNames(null, true, webContext.getSimpleName());
-        });
+        filters.forEach((f) -> f.addMappingForServletNames(null, true, webContext.getSimpleName()));
     }
 
     private AnnotationConfigWebApplicationContext createContext(final Class<?>... annotatedClasses) {
