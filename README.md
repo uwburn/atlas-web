@@ -1,4 +1,4 @@
-## Atlas archetype
+## Atlas web archetype
 Spring MVC + Hibernate JPA web project: use this project as a template, then 
 create and share Maven archetype from it.
 
@@ -8,8 +8,8 @@ create and share Maven archetype from it.
 Check version number, 1.2.0 is there as an example.
 
 ### Create project from archetype
-`mvn archetype:generate -DarchetypeGroupId=it.mgt.archetype -DarchetypeArtifactId=atlas-archetype -DarchetypeVersion=1.2.0
--DgroupId=it.mgt.archetype -DartifactId=atlas -Dpackage=it.mgt.atlas`
+`mvn archetype:generate -DarchetypeGroupId=it.mgt.archetype -DarchetypeArtifactId=atlas-web-archetype -DarchetypeVersion=1.2.0
+-DgroupId=it.mgt.archetype -DartifactId=atlas-web -Dpackage=it.mgt.atlas`
 
 Check version number, 1.2.0 is there as an example.
 
