@@ -5,7 +5,7 @@
     <name>atlas-web</name>
     <groupId>it.mgt.archetype</groupId>
     <artifactId>atlas-web</artifactId>
-    <version>1.2.1</version>
+    <version>1.2.2</version>
     <packaging>war</packaging>
 
     <properties>
