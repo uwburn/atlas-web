@@ -31,7 +31,7 @@
         <dependency>
             <groupId>it.mgt.util</groupId>
             <artifactId>json2jpa</artifactId>
-            <version>1.1.7</version>
+            <version>1.1.9</version>
         </dependency>
         <dependency>
             <groupId>it.mgt.util</groupId>
@@ -46,7 +46,7 @@
         <dependency>
             <groupId>it.mgt.util</groupId>
             <artifactId>spring-web</artifactId>
-            <version>1.1.6</version>
+            <version>1.1.9</version>
         </dependency>
         <!-- Servlet -->
         <dependency>
