@@ -5,6 +5,8 @@ import it.mgt.atlas.annotation.CustomExampleInj;
 import it.mgt.atlas.entity.Example;
 import it.mgt.atlas.entity.Operation;
 import it.mgt.atlas.view.DefaultView;
+import it.mgt.uti.jpajsonsearch.JpaJsonSearchFactory;
+import it.mgt.uti.jpajsonsearch.JpaJsonSearchResult;
 import it.mgt.util.spring.web.jsonview.DynamicJsonView;
 import it.mgt.util.spring.web.resolver.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,8 @@ import it.mgt.atlas.repository.ExampleRepo;
 import it.mgt.util.json2jpa.Json2JpaFactory;
 import it.mgt.util.spring.web.auth.RequiredOperation;
 import it.mgt.util.spring.web.jpa.JpaInj;
+
+import java.util.Date;
 import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,6 +35,23 @@ public class ExamplesCtrl {
 
     @Autowired
     private Json2JpaFactory json2JpaFactory;
+
+    @Autowired
+    private JpaJsonSearchFactory jpaJsonSearchFactory;
+
+    @RequestMapping(method = RequestMethod.POST, value = "/search")
+    @ResponseBody
+    @RequiredOperation(Operation.READ_EXAMPLE)
+    @DynamicJsonView(defaultView = DefaultView.class)
+    public JpaJsonSearchResult search(@RequestBody JsonNode json) {
+        return jpaJsonSearchFactory.build(Example.class)
+                .alias("e")
+                .from("Example e")
+                .addParameter("code", "e.code", String.class)
+                .addParameter("entryDate", "e.entryDate", Date.class)
+                .parse(json)
+                .result();
+    }
 
     @RequestMapping(method = RequestMethod.GET)
     @ResponseBody

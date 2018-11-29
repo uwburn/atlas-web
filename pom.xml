@@ -30,6 +30,11 @@
         <!-- Michele -->
         <dependency>
             <groupId>it.mgt.util</groupId>
+            <artifactId>jpa-json-search</artifactId>
+            <version>1.1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>it.mgt.util</groupId>
             <artifactId>json2jpa</artifactId>
             <version>1.1.10</version>
         </dependency>
