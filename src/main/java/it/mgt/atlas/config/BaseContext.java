@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.introspect.AnnotationIntrospectorPair;
 import com.fasterxml.jackson.databind.introspect.JacksonAnnotationIntrospector;
 import com.fasterxml.jackson.module.jaxb.JaxbAnnotationIntrospector;
+import it.mgt.uti.jpajsonsearch.JpaJsonSearchFactory;
 import it.mgt.util.json2jpa.Json2JpaFactory;
 import it.mgt.util.spring.config.EntityPackage;
 import it.mgt.util.spring.config.EntityPackageAwareConfiguration;
@@ -165,6 +166,11 @@ public class BaseContext extends EntityPackageAwareConfiguration {
     @Bean
     public Json2JpaFactory json2JpaFactory() {
         return new Json2JpaFactory();
+    }
+
+    @Bean
+    public JpaJsonSearchFactory jpaJsonSearchFactory() {
+        return new JpaJsonSearchFactory();
     }
 
 }
