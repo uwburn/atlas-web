@@ -14,10 +14,10 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <spring.version>5.0.4.RELEASE</spring.version>
         <hibernate.version>5.2.14.Final</hibernate.version>
-        <jackson.version>2.9.7</jackson.version>
+        <jackson.version>2.9.8</jackson.version>
         <javax.servlet-api.version>3.1.0</javax.servlet-api.version>
         <javaee-web-api.version>7.0</javaee-web-api.version>
-        <commons-fileupload.version>1.3.1</commons-fileupload.version>
+        <commons-fileupload.version>1.3.3</commons-fileupload.version>
         <javax.mail.version>1.6.1</javax.mail.version>
         <jmustache.version>1.14</jmustache.version>
         <slf4j.version>1.7.25</slf4j.version>
@@ -31,12 +31,12 @@
         <dependency>
             <groupId>it.mgt.util</groupId>
             <artifactId>jpa-json-search</artifactId>
-            <version>1.1.0</version>
+            <version>1.1.2</version>
         </dependency>
         <dependency>
             <groupId>it.mgt.util</groupId>
             <artifactId>json2jpa</artifactId>
-            <version>1.1.10</version>
+            <version>1.1.11</version>
         </dependency>
         <dependency>
             <groupId>it.mgt.util</groupId>
@@ -46,12 +46,12 @@
         <dependency>
             <groupId>it.mgt.util</groupId>
             <artifactId>spring</artifactId>
-            <version>1.1.5</version>
+            <version>1.1.6</version>
         </dependency>
         <dependency>
             <groupId>it.mgt.util</groupId>
             <artifactId>spring-web</artifactId>
-            <version>1.1.9</version>
+            <version>1.1.11</version>
         </dependency>
         <!-- Servlet -->
         <dependency>
