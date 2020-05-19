@@ -20,10 +20,10 @@
         <commons-fileupload.version>1.3.3</commons-fileupload.version>
         <javax.mail.version>1.6.1</javax.mail.version>
         <jmustache.version>1.14</jmustache.version>
-        <slf4j.version>1.7.25</slf4j.version>
         <junit.version>4.12</junit.version>
         <hsqldb.version>2.4.0</hsqldb.version>
         <c3p0.version>0.9.5.2</c3p0.version>
+        <log4j.version>2.13.2</log4j.version>
     </properties>
 
     <dependencies>
@@ -128,11 +128,26 @@
             <artifactId>jmustache</artifactId>
             <version>${jmustache.version}</version>
         </dependency>
-        <!-- SLF4J -->
+        <!-- Logging -->
         <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-log4j12</artifactId>
-            <version>${slf4j.version}</version>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>${log4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>${log4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j-impl</artifactId>
+            <version>${log4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-1.2-api</artifactId>
+            <version>${log4j.version}</version>
         </dependency>
 
         <!-- Test dependencies -->

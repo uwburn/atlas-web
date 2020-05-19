@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+    <Appenders>
+        <Console name="console" target="SYSTEM_OUT">
+            <PatternLayout   pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level - [%t] %c{1} - %msg%n" />
+        </Console>
+    </Appenders>
+
+    <Loggers>
+        <Root level="WARN">
+            <AppenderRef ref="console"/>
+        </Root>
+
+        <Logger name="it.mgt.atlas" level="DEBUG" />
+
+        <Logger name="org.hibernate.cfg.AnnotationBinder" level="ERROR" />
+        <Logger name="org.hibernate.engine.internal.StatefulPersistenceContext" level="ERROR" />
+
+        <!-- Show Hibernate queries -->
+        <!-- Logger name="org.hibernate" level="INFO" />
+        <Logger name="org.hibernate.SQL" level="DEBUG" /-->
+    </Loggers>
+</Configuration>

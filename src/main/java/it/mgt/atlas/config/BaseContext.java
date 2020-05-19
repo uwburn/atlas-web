@@ -159,11 +159,6 @@ public class BaseContext extends EntityPackageAwareConfiguration {
     }
 
     @Bean
-    public Log4JRefresh log4JRefresh() {
-        return new Log4JRefresh();
-    }
-
-    @Bean
     public Json2JpaFactory json2JpaFactory() {
         return new Json2JpaFactory();
     }
