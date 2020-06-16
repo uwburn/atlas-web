@@ -67,8 +67,7 @@ public class User implements AuthUser, Serializable {
 
     @Override
     public Set<AuthRole> authRoles() {
-        return getRoles().stream()
-                .collect(Collectors.toSet());
+        return new HashSet<>(getRoles());
     }
 
     @Override
