@@ -1,12 +1,6 @@
 package it.mgt.atlas.config;
 
-import it.mgt.util.spring.web.auth.AuthRequestWrapperFilter;
 import it.mgt.util.spring.web.cors.CorsFilter;
-import javax.servlet.FilterRegistration.Dynamic;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRegistration;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.WebApplicationInitializer;
@@ -14,20 +8,19 @@ import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
 
+import javax.servlet.FilterRegistration.Dynamic;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRegistration;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Properties;
-import java.util.Set;
+import java.util.*;
 
 public class WebInit implements WebApplicationInitializer {
 
     private final static Logger LOGGER = LoggerFactory.getLogger(WebInit.class);
 
     private static final String CORS_FILTER_NAME = "cors";
-    private static final String AUTH_REQUEST_WRAPPER_FILTER_NAME = "authRequestWrapper";
 
     @Override
     public void onStartup(ServletContext servletContext) throws ServletException {
@@ -48,8 +41,6 @@ public class WebInit implements WebApplicationInitializer {
         List<Dynamic> filters = new ArrayList<>();
         CorsFilter corsFilter = corsFilter();
         filters.add(servletContext.addFilter(CORS_FILTER_NAME, corsFilter));
-        AuthRequestWrapperFilter authRequestWrapperFilter = new AuthRequestWrapperFilter();
-        filters.add(servletContext.addFilter(AUTH_REQUEST_WRAPPER_FILTER_NAME, authRequestWrapperFilter));
         return filters;
     }
 
