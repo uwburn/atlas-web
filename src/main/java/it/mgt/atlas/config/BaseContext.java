@@ -8,10 +8,11 @@ import com.fasterxml.jackson.databind.introspect.AnnotationIntrospectorPair;
 import com.fasterxml.jackson.databind.introspect.JacksonAnnotationIntrospector;
 import com.fasterxml.jackson.module.jaxb.JaxbAnnotationIntrospector;
 import it.mgt.uti.jpajsonsearch.JpaJsonSearchFactory;
+import it.mgt.util.hibernate.jackson.HibernateModule;
 import it.mgt.util.json2jpa.Json2JpaFactory;
 import it.mgt.util.spring.config.EntityPackage;
 import it.mgt.util.spring.config.EntityPackageAwareConfiguration;
-import it.mgt.util.spring.log4j.Log4JRefresh;
+import it.mgt.util.spring.meta.ProjectMetaSvc;
 import it.mgt.util.spring.meta.ProjectMetaSvcImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.*;
@@ -19,6 +20,7 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.env.Environment;
 import org.springframework.core.task.TaskExecutor;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
+import org.springframework.http.converter.json.SpringHandlerInstantiator;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
@@ -36,8 +38,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
-import org.springframework.http.converter.json.SpringHandlerInstantiator;
-import it.mgt.util.spring.meta.ProjectMetaSvc;
 
 @Configuration
 @ComponentScan(basePackages = {"it.mgt.atlas.repository.impl", "it.mgt.atlas.service.impl", "it.mgt.atlas.task"})
@@ -131,6 +131,8 @@ public class BaseContext extends EntityPackageAwareConfiguration {
         mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
         mapper.setAnnotationIntrospector(pair);
         mapper.setHandlerInstantiator(new SpringHandlerInstantiator(applicationContext.getAutowireCapableBeanFactory()));
+
+        mapper.registerModule(new HibernateModule());
 
         return mapper;
     }
