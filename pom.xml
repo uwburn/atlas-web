@@ -23,7 +23,7 @@
         <junit.version>4.12</junit.version>
         <hsqldb.version>2.4.0</hsqldb.version>
         <c3p0.version>0.9.5.2</c3p0.version>
-        <log4j.version>2.13.2</log4j.version>
+        <log4j.version>2.15.0</log4j.version>
     </properties>
 
     <dependencies>
