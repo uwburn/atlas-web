@@ -21,44 +21,48 @@
         <javax.mail.version>1.6.1</javax.mail.version>
         <jmustache.version>1.14</jmustache.version>
         <junit.version>4.13.1</junit.version>
-        <hsqldb.version>2.7.1</hsqldb.version>
+        <hsqldb.version>2.5.2</hsqldb.version>
         <c3p0.version>0.9.5.4</c3p0.version>
         <log4j.version>2.17.1</log4j.version>
     </properties>
 
-    <repositories>
+    <distributionManagement>
         <repository>
-            <id>jitpack.io</id>
-            <url>https://jitpack.io</url>
+            <id>gitlab-maven</id>
+            <url>${CI_API_V4_URL}/projects/${env.CI_PROJECT_ID}/packages/maven</url>
         </repository>
-    </repositories>
+        <snapshotRepository>
+            <id>gitlab-maven</id>
+            <url>${CI_API_V4_URL}/projects/${env.CI_PROJECT_ID}/packages/maven</url>
+        </snapshotRepository>
+    </distributionManagement>
 
     <dependencies>
         <!-- Michele -->
         <dependency>
-            <groupId>com.github.uwburn</groupId>
+            <groupId>it.mgt.util</groupId>
             <artifactId>jpa-json-search</artifactId>
             <version>1.2.8</version>
         </dependency>
         <dependency>
-            <groupId>com.github.uwburn</groupId>
+            <groupId>it.mgt.util</groupId>
             <artifactId>json2jpa</artifactId>
             <version>1.2.8</version>
         </dependency>
         <dependency>
-            <groupId>com.github.uwburn</groupId>
-            <artifactId>hibernate-util</artifactId>
+            <groupId>it.mgt.util</groupId>
+            <artifactId>hibernate</artifactId>
             <version>1.2.0</version>
         </dependency>
         <dependency>
-            <groupId>com.github.uwburn</groupId>
-            <artifactId>spring-util</artifactId>
+            <groupId>it.mgt.util</groupId>
+            <artifactId>spring</artifactId>
             <version>1.1.8</version>
         </dependency>
         <dependency>
-            <groupId>com.github.uwburn</groupId>
-            <artifactId>spring-web-util</artifactId>
-            <version>1.2.6</version>
+            <groupId>it.mgt.util</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>1.2.7</version>
         </dependency>
         <!-- Servlet -->
         <dependency>
